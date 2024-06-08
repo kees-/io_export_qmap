@@ -667,6 +667,7 @@ class ExportQuakeMap(bpy.types.Operator, ExportHelper):
 
 
     def process_mesh(self, obj, fw, template):
+        print(f"> processing mesh {obj}")
         geo_type = obj.qmap_geo_type
         if geo_type == 'Default':
             geo_type = self.option_geo
@@ -727,6 +728,7 @@ class ExportQuakeMap(bpy.types.Operator, ExportHelper):
                 fw(")\n}\n}\n")
 
         else: # export each face as a brush
+            print("> exporting each face as brush")
             bmesh.ops.connect_verts_concave(bm, faces=bm.faces) # concave poly
             if self.option_tj:
                 tjfaces = []
@@ -742,7 +744,9 @@ class ExportQuakeMap(bpy.types.Operator, ExportHelper):
                 bottom = min(vert.co.z for vert in bm.verts)
                 bottom -= self.option_depth
 
+            total_faces = len(bm.faces[:])
             for face in bm.faces[:]:
+                print(f"processing {face.index} / {total_faces}\033[F\r")
                 if face.calc_area() <= 1e-4:
                     continue
                 flags = self.faceflags(face, bm, orig_obj)
@@ -1031,6 +1035,7 @@ def menu_func_export(self, context):
     self.layout.operator(ExportQuakeMap.bl_idname, text="Quake Map (.map)")
 
 def register():
+    print("registering qmap export")
     bpy.utils.register_class(ExportQuakeMap)
     bpy.types.Object.qmap_geo_type = bpy.props.EnumProperty(name="Geo",
         items=(('Default', "Default", "No override"),) + ptxt['geo']['items'],
