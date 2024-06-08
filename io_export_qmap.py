@@ -425,10 +425,9 @@ class ExportQuakeMap(bpy.types.Operator, ExportHelper):
         if mat:
             if mat.node_tree:
                 for node in mat.node_tree.nodes:
-                    if node.type == 'TEX_IMAGE':
-                        if node.image.has_data:
-                            width, height = node.image.size
-                            break
+                    if hasattr(node, 'image') and hasattr(node.image, 'has_data'):
+                        width, height = node.image.size
+                        break
             texstring = mat.name.replace(" ","_")
         else:
             texstring = self.option_skip
