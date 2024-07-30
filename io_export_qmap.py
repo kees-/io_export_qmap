@@ -753,33 +753,8 @@ class ExportQuakeMap(bpy.types.Operator, ExportHelper):
                 fw(self.brushplane(face))
                 fw(self.texdata(face, bm, obj) + flags) # write original face
 
-                if geo_type in ('Faces', 'Blob'):
-                    new = bmesh.ops.poke(bm, faces=[face],
-                                offset=-self.option_depth)
-                    if geo_type == 'Blob':
-                        new['verts'][0].co = origin
-                    elif geo_type == 'Faces':
-                        new['verts'][0].co = self.gridsnap(new['verts'][0].co)
-
-                elif geo_type in ('Prisms', 'Soup', 'Miter'):
-                    clone = face.copy() # keep original face & vertex normals
-                    new = bmesh.ops.extrude_discrete_faces(bm, faces=[clone])
-                    new_verts = new['faces'][0].verts
-
-                    if geo_type == 'Prisms':
-                        bmesh.ops.translate(bm, verts=new_verts,
-                            vec=face.normal * -self.option_depth)
-                    elif geo_type == 'Soup':
-                        for vert in new_verts:
-                            vert.co.z = bottom
-                    elif geo_type == 'Miter':
-                        for new_v, orig_v in zip(new_verts, face.verts):
-                            new_v.co -= (orig_v.normal *
-                                orig_v.calc_shell_factor() * self.option_depth)
-
-                    geom = bmesh.ops.region_extend(bm, use_faces=True,
-                                                    geom=new['faces'])
-                    new['faces'].extend(geom['geom'])
+                new = bmesh.ops.poke(bm, faces=[face], offset=-self.option_depth)
+                new['verts'][0].co = self.gridsnap(new['verts'][0].co)
 
                 bm.normal_update()
                 for newface in new['faces']: # write new faces
