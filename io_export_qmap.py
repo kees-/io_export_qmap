@@ -243,8 +243,11 @@ class ExportQuakeMapPreferences(bpy.types.AddonPreferences):
         col = self.layout.column()
         for p in ["group", "gname", "skip", "size"]: col.prop(self, p)
 
-bpy.utils.register_class(ExportQuakeMapPreferences)
+boilerplate = {
+    'header': "// Game: Generic\n// Format: Standard\n// entity 0\n"
+}
 
+bpy.utils.register_class(ExportQuakeMapPreferences)
 
 class ExportQuakeMap(bpy.types.Operator, ExportHelper):
     bl_idname = 'export.map'
@@ -905,6 +908,7 @@ class ExportQuakeMap(bpy.types.Operator, ExportHelper):
             template = ['{\nbrushDef\n{\n', '}\n}\n']
         else:
             template = ['{\n', '}\n']
+        fw(boilerplate['header'])
         fw('{\n"classname" "worldspawn"\n')
         if self.option_uv == 'Valve':
             fw('"mapversion" "220"\n')
@@ -1002,6 +1006,7 @@ class ExportQuakeMap(bpy.types.Operator, ExportHelper):
 
         timer = time.time() - timer
         self.report({'INFO'},f"Finished exporting map, took {timer:g} sec")
+        print(f"Finished exporting map, took {timer:g} sec")
         return {'FINISHED'}
 
 
