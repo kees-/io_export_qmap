@@ -892,6 +892,12 @@ class ExportQuakeMap(bpy.types.Operator, ExportHelper):
                 fw(f'"{prop}" "{obj[prop]}"\n')
         fw('}\n')
 
+    def process_scene_defs(self, fw):
+        world = bpy.context.scene.world
+        for prop in world.keys():
+            if isinstance(world[prop], (float, str)):
+                fw(f'"{prop}" "{world[prop]}"\n')
+
 
     def execute(self, context):
         timer = time.time()
@@ -910,6 +916,7 @@ class ExportQuakeMap(bpy.types.Operator, ExportHelper):
             template = ['{\n', '}\n']
         fw(boilerplate['header'])
         fw('{\n"classname" "worldspawn"\n')
+        self.process_scene_defs(fw)
         if self.option_uv == 'Valve':
             fw('"mapversion" "220"\n')
 
