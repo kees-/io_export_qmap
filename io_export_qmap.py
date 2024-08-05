@@ -116,13 +116,15 @@ ptxt = {
 
     'grid': {"name":"Grid", "def":1.0,
         "desc":"Grid size to snap coordinates to\n(0 = don't snap)"},
-    'depth': {"name":"Depth", "def":2.0,
+    'depth': {"name":"Depth", "def":10.0,
         "desc":"Offset for extrusion, pyramid apex and terrain bottom"\
-            "\n\nWhen using a larger grid, make sure to increase this as well"},
-    'scale': {"name":"Scale", "def":1.0,
+            "\n\nWhen using a larger grid, make sure to increase this as well"\
+            "\nNOTE: KEEP PLAYING WITH THIS TO IMPROVE EDGE SPECKLES"},
+    'scale': {"name":"Scale", "def":22500.0,
         "desc":"Scale factor for all 3D coordinates"\
         "\n\n1 Quake unit is approximately 1 inch"\
-        "\nA scale of about 40-48 is appropriate for a scene in meters"},
+        "\nA scale of about 40-48 is appropriate for a scene in meters"\
+        "\nNOTE: 22500 | 1x1m PLANE = HUGE MAP"},
     'fp': {"name":"Precision", "def":5,
         "desc":"Number of decimal places"},
 
@@ -164,7 +166,7 @@ ptxt = {
                 "\n\nTrailing numbers after the name will be removed\n"\
                 "Use 'worldspawn' name on objects you want to keep ungrouped"),
             ('Gen', "Generic", "Group under generic classnames (set below)"))},
-    'gname': {"name":"Generic classname", "def":'func_group',
+    'gname': {"name":"Generic classname", "def":'',
         "desc":"Class name for brush entities, unless set otherwise"\
             "\n\ne.g.:\nfunc_group\nfunc_detail"},
     'skip': {"name":"Generic material", "def":'skip',
