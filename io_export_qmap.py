@@ -60,49 +60,52 @@ ptxt = {
 
     'geo': {"name":"Mesh", "def":'Faces',
         "items":(
-            ('Brush',"Brush","Export each mesh as a single brush"\
-                "\n\nMore control, but takes more effort to prepare"\
-                "\nBy default, brushes are grouped by collection"),
+            # ('Brush',"Brush","Export each mesh as a single brush"\
+            #     "\n\nMore control, but takes more effort to prepare"\
+            #     "\nBy default, brushes are grouped by collection"),
             ('Faces',"Faces","Export each face as a pyramid brush"\
                 "\n\nBest for detailed geometry, but hard to edit later"),
-            ('Prisms',"Walls","Export each face as an extruded prism brush"\
-                "\n\nBest for simple walls that you plan to edit afterwards"),
-            ('Soup',"Terrain","Export faces as vertically extruded poly soup"\
-                "\n\nExtrudes faces along Z to their lowest vert's height"\
-                "\nUseful when you want to save on collision planes"),
-            ('Blob',"Blob","Export faces as pyramids with a common apex"\
-                "\n\nPuts the shared apex at object's origin point"\
-                "\nUseful when you want a solid sealed convex-ish boulder"),
-            ('Miter',"Shell","Export faces as a solidified shell"\
-                "\n\nExtrudes along vert normals, with miter joints inbetween"\
-                "\nUnreliable, as the resulting joints may be non-planar"),
-            ('Patches',"Patches","Export each face as a flat patch (fast)") )},
-    'nurbs': {"name":"Nurbs", "def":'Mesh',
+            # ('Prisms',"Walls","Export each face as an extruded prism brush"\
+            #     "\n\nBest for simple walls that you plan to edit afterwards"),
+            # ('Soup',"Terrain","Export faces as vertically extruded poly soup"\
+            #     "\n\nExtrudes faces along Z to their lowest vert's height"\
+            #     "\nUseful when you want to save on collision planes"),
+            # ('Blob',"Blob","Export faces as pyramids with a common apex"\
+            #     "\n\nPuts the shared apex at object's origin point"\
+            #     "\nUseful when you want a solid sealed convex-ish boulder"),
+            # ('Miter',"Shell","Export faces as a solidified shell"\
+            #     "\n\nExtrudes along vert normals, with miter joints inbetween"\
+            #     "\nUnreliable, as the resulting joints may be non-planar"),
+            # ('Patches',"Patches","Export each face as a flat patch (fast)")
+        )},
+    'nurbs': {"name":"Nurbs", "def":'None',
         "items":(
             ('None', "Ignore", "Ignore NURBS surfaces"),
-            ('Mesh', "Mesh", "Convert NURBS to meshes, export as brushes"),
-            ('Def2', "Dynamic", "Export NURBS as patchDef2 patches"\
-                " (dynamic subdivision)\n\nFor a better preview in Blender:"\
-                "\nEnable Bezier, Endpoints, and set Order to 3x3"\
-                "\nSelect all points and set their W to 100 or higher"),
-            ('Def3', "Fixed", "Export NURBS as patchDef3 patches"\
-                " (explicit subdivision)\n\nFor a better preview in Blender:"\
-                "\nEnable Bezier, Endpoints, and set Order to 3x3"\
-                "\nSelect all points and set their W to 100 or higher") )},
-    'lights': {"name":"Light", "def":'Auto',
+            # ('Mesh', "Mesh", "Convert NURBS to meshes, export as brushes"),
+            # ('Def2', "Dynamic", "Export NURBS as patchDef2 patches"\
+            #     " (dynamic subdivision)\n\nFor a better preview in Blender:"\
+            #     "\nEnable Bezier, Endpoints, and set Order to 3x3"\
+            #     "\nSelect all points and set their W to 100 or higher"),
+            # ('Def3', "Fixed", "Export NURBS as patchDef3 patches"\
+            #     " (explicit subdivision)\n\nFor a better preview in Blender:"\
+            #     "\nEnable Bezier, Endpoints, and set Order to 3x3"\
+                # "\nSelect all points and set their W to 100 or higher")
+        )},
+    'lights': {"name":"Light", "def":'None',
         "items":(
             ('None', "Ignore", "Ignore light objects"),
-            ('Auto', "Adaptive", "Export lights, approximate intensity"\
-                "\n\nAttempts to match the lights' appearance"\
-                " by scaling their brightness with the scene scale."\
-                "\nNote that for exporting in 1:1 scale, light intensity"\
-                " will likely need to be in the thousands."\
-                "\n\nSpotlights automatically get a target."\
-                "\nidTech4-format lights can be exported by choosing"\
-                " 'Doom 3' as the brush plane format"),
-            ('AsIs', "Explicit", "Export lights, use intensity as is"\
-                "\n\nSame as 'Adaptive', except intensity will be used as is."\
-                "\nMostly useful with imported maps and pre-set lights") )},
+            # ('Auto', "Adaptive", "Export lights, approximate intensity"\
+            #     "\n\nAttempts to match the lights' appearance"\
+            #     " by scaling their brightness with the scene scale."\
+            #     "\nNote that for exporting in 1:1 scale, light intensity"\
+            #     " will likely need to be in the thousands."\
+            #     "\n\nSpotlights automatically get a target."\
+            #     "\nidTech4-format lights can be exported by choosing"\
+            #     " 'Doom 3' as the brush plane format"),
+            # ('AsIs', "Explicit", "Export lights, use intensity as is"\
+            #     "\n\nSame as 'Adaptive', except intensity will be used as is."\
+                # "\nMostly useful with imported maps and pre-set lights")
+        )},
     'empties': {"name":"Empty", "def":'Point',
         "items":(
             ('None', "Ignore", "Ignore empty objects"),
@@ -127,8 +130,9 @@ ptxt = {
         "items":(
             ('Quake', "Quake", "Brush planes as three vertices"\
                 "\n(Quake, Half-Life, Quake 2, Quake 3)"),
-            ('Doom3', "Doom 3", "Brush planes as normal + distance"\
-                "\n(Doom 3, Quake 4)") )},
+            # ('Doom3', "Doom 3", "Brush planes as normal + distance"\
+            #     "\n(Doom 3, Quake 4)")
+        )},
     'uv': {"name":"UVs", "def":'Valve',
         "items":(
             ('Quake', "Standard", "World-aligned texture projection"),
@@ -138,18 +142,20 @@ ptxt = {
         "items":(
             ('None', "None", "No flags"\
                 "\n(Quake, Half-Life, Quake 4)"),
-            ('Q2', "Quake 2", "Content, Surface, Value"\
-                "\n(Quake 2, Quake 3, Doom 3)"\
-                "\n\nSets the Detail flag for faces that belong to:"\
-                "\n - a face map,\n - an object,\n - or a collection"\
-                "\nwith 'detail' in their name") )},
+            # ('Q2', "Quake 2", "Content, Surface, Value"\
+            #     "\n(Quake 2, Quake 3, Doom 3)"\
+            #     "\n\nSets the Detail flag for faces that belong to:"\
+            #     "\n - a face map,\n - an object,\n - or a collection"\
+            #     "\nwith 'detail' in their name")
+        )},
     'dest': {"name":"Output", "def":'File',
         "items":(
             ('File', "File", "Save to a .map file"),
             ('Clip', "Text", "Store in text clipboard"\
                 "\n\nCan then be pasted in TrenchBroom"),
-            ('GTK', "GTK", "Store in GTK clipboard"\
-                "\n\nCan then be pasted in GTKRadiant, NetRadiant, etc") )},
+            # ('GTK', "GTK", "Store in GTK clipboard"\
+            #     "\n\nCan then be pasted in GTKRadiant, NetRadiant, etc")
+        )},
 
     'group': {"name":"Grouping", "def":'Gen',
         "items":(
@@ -816,8 +822,8 @@ class ExportQuakeMap(bpy.types.Operator, ExportHelper):
         fw('{\n"classname" "light"\n')
         fw(f'"origin" "{self.printvec(origin)}"\n')
         fw(f'"_color" "{self.printvec(obj.data.color)}"\n')
-        if self.option_lights == 'Auto':
-            intensity *= self.option_scale**2 / 40**2 # 1 inch = 1 unit
+        # if self.option_lights == 'Auto':
+        #     intensity *= self.option_scale**2 / 40**2 # 1 inch = 1 unit
         fw(f'"light" "{intensity}"\n')
 
         keys = obj.keys()
