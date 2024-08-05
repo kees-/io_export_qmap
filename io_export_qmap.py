@@ -328,8 +328,12 @@ class ExportQuakeMap(bpy.types.Operator, ExportHelper):
         spl = self.layout.row().split(factor=0.5)
         col = spl.column()
         for p in [o+"geo",o+"nurbs"]: col.prop(self, p)
+        col.enabled = False
         col = spl.column()
-        for p in [o+"lights",o+"empties"]: col.prop(self, p)
+        row = col.row()
+        row.prop(self, o+"lights")
+        row.enabled = False
+        col.prop(self, o+"empties")
         self.layout.separator()
         self.layout.label(text="Coordinates", icon='MESH_DATA')
         spl = self.layout.row().split(factor=0.5)
@@ -341,9 +345,15 @@ class ExportQuakeMap(bpy.types.Operator, ExportHelper):
         self.layout.label(text="Output format", icon='UV_DATA')
         spl = self.layout.row().split(factor=0.5)
         col = spl.column()
-        for p in [o+"brush",o+"uv"]: col.prop(self, p)
+        row = col.row()
+        row.prop(self, o+"brush")
+        row.enabled = False
+        col.prop(self, o+"uv")
         col = spl.column()
-        for p in [o+"flags",o+"dest"]: col.prop(self, p)
+        row = col.row()
+        row.prop(self, o+"flags")
+        row.enabled = False
+        col.prop(self, o+"dest")
         self.layout.separator()
         self.layout.label(text="Miscellaneous", icon='GROUP')
         col = self.layout.column()
